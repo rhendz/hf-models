@@ -12,8 +12,8 @@ class SpiceCNNModelForImageClassification(PreTrainedModel):
         super().__init__(config)
         layers = [
             nn.Conv2d(
-                1,
-                32,
+                3,
+                16,
                 kernel_size=config.kernel_size,
                 stride=config.stride,
                 padding=config.padding,
@@ -21,8 +21,8 @@ class SpiceCNNModelForImageClassification(PreTrainedModel):
             nn.ReLU(),
             nn.MaxPool2d(kernel_size=config.pooling_size),
             nn.Conv2d(
+                16,
                 32,
-                64,
                 kernel_size=config.kernel_size,
                 stride=config.stride,
                 padding=config.padding,
@@ -30,7 +30,7 @@ class SpiceCNNModelForImageClassification(PreTrainedModel):
             nn.ReLU(),
             nn.MaxPool2d(kernel_size=config.pooling_size),
             nn.Flatten(),
-            nn.Linear(7 * 7 * 64, 128),
+            nn.Linear(7 * 7 * 32, 128),
             nn.ReLU(),
             nn.Linear(128, config.num_classes),
         ]
@@ -39,6 +39,7 @@ class SpiceCNNModelForImageClassification(PreTrainedModel):
     def forward(self, tensor, labels=None):
         logits = self.model(tensor)
         if labels is not None:
-            loss = nn.CrossEntropyLoss(logits, labels)
+            loss_fnc = nn.CrossEntropyLoss()
+            loss = loss_fnc(logits, labels)
             return {"loss": loss, "logits": logits}
         return {"logits": logits}
