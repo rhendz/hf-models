@@ -26,8 +26,9 @@ class SpiceCNNConfig(PretrainedConfig):
 
     def __init__(
         self,
+        in_channels: int = 3,
         num_classes: int = 10,
-        dropout_rate: float = 0.2,
+        dropout_rate: float = 0.4,
         hidden_size: int = 128,
         num_filters: int = 16,
         kernel_size: int = 3,
@@ -37,7 +38,7 @@ class SpiceCNNConfig(PretrainedConfig):
         **kwargs
     ):
         super().__init__(**kwargs)
-
+        self.in_channels = in_channels
         self.num_classes = num_classes
         self.dropout_rate = dropout_rate
         self.hidden_size = hidden_size

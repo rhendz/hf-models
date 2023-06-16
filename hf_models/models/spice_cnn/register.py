@@ -19,7 +19,7 @@ def main():
         do_resize=False, do_rescale=False, do_normalize=False
     )
 
-    spice_cnn_base_config = SpiceCNNConfig()
+    spice_cnn_base_config = SpiceCNNConfig(in_channels=1)
     spice_cnn_base = SpiceCNNModelForImageClassification(spice_cnn_base_config)
 
     spice_cnn_base_image_processor.push_to_hub(repo_id=MODEL_REPO_ID)
