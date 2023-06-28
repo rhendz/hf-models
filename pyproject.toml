@@ -21,6 +21,7 @@ evaluate = "^0.4.0"
 scikit-learn = "^1.2.2"
 torchsummary = "^1.5.1"
 wandb = "^0.15.4"
+diffusers = "^0.17.1"
 
 
 [tool.poetry.group.dev.dependencies]
